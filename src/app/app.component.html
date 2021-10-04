@@ -1,51 +1,186 @@
+<h1>Form</h1>
+
+<form (ngSubmit)="onRegister()" #registerForm="ngForm">
+  <div class="input-group">
+    <label for="name">Name</label>
+    <input required type="text" name="name" id="name" [(ngModel)]="register.name">
+    <p>Error Messages</p>
+  </div>
+  <div class="input-group">
+    <label for="email">email</label>
+    <input required type="email" name="email" id="email" [(ngModel)]="register.email">
+    <p>Error Messages</p>
+  </div>
+  <div class="input-group">
+    <label for="password">password</label>
+    <input required type="text" name="password" id="password" [(ngModel)]="register.password">
+    <p>Error Messages</p>
+  </div>
+
+  <button type="button">Clear</button>
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>
+
+<hr>
+
+<h1>ngClass & ngStyle</h1>
+
+<input type="text" required #classInput3="ngModel" [(ngModel)]="person.name">
+<hr class="line-error" [ngClass]= "{
+  'valid': classInput3.valid,
+  'invalid': classInput3.invalid
+}">
+<p class="message-error" [class.invalid]="classInput3.invalid">The input is required</p>
+
+<div class="image-style">
+  <div>
+    <input type="number" required [(ngModel)]="box.width">
+    <input type="number" required [(ngModel)]="box.height">
+    <input type="color" required [(ngModel)]="box.background">
+  </div>
+  <div [ngStyle]="{
+    'width.px': box.width,
+    'height.px': box.height,
+    'background-color': box.background,
+    'display': 'block'
+  }">
+
+  </div>
+</div>
+<hr>
+<h1>Class  & Styles</h1>
+
+<input type="text" required #classInput="ngModel" [(ngModel)]="person.name">
+
+<p class="message-error" [class.invalid]="classInput.invalid">The input is required</p>
+
+<label>Name</label>
+<input type="text" required #classInput2="ngModel" [(ngModel)]="person.name">
+<p [style.font-style]="classInput2.invalid ? 'italic' : 'normal'">Lorem, ipsum dolor.</p>
+
+<div class="image-style">
+  <div>
+    <input type="number" [(ngModel)]="widthImg">
+  </div>
+  <div>
+    <img [src]="person.avatar" [style.width.px]="widthImg" />
+  </div>
+</div>
+<hr>
+
+<h1>ngSwitch</h1>
+
+<input type="text" [(ngModel)]="person.name" />
+<!-- <p *ngIf="person.name === 'michael'">michael</p>
+<p *ngIf="person.name === 'kevin'">kevin</p>
+<p *ngIf="person.name === 'angela'">angela</p> -->
+<div [ngSwitch]="person.name">
+  <p *ngSwitchCase="'michael'">{{person.name | titlecase}}</p>
+  <p *ngSwitchCase="'kevin'">{{person.name | titlecase}}</p>
+  <p *ngSwitchCase="'angela'">{{person.name | titlecase}}</p>
+  <p *ngSwitchDefault>No match</p>
+</div>
+
+
+<h1>ngFor of Products</h1>
+
+<div class="products--grid">
+  <div *ngFor="let product of products">
+    <img [src]="product.image" alt="image product">
+    <h2>Price: {{product.price}}</h2>
+    <p>Product: {{product.name | titlecase}}</p>
+  </div>
+</div>
+
+<h1>ngFor</h1>
+
+<input
+  type="text"
+  #addNameInput="ngModel"
+  required
+  minlength="1"
+  [(ngModel)]="newName"
+/>
+<button [disabled]="!addNameInput.valid" (click)="addName()">Add Name</button>
+
+<ul>
+  <li *ngIf="names.length === 0">No names to list</li>
+  <li *ngFor="let name of names; index as i">
+    {{ i }} {{ name | titlecase }}
+    <button (click)="delName(i)">Delete Me</button>
+  </li>
+</ul>
+
+<h1>ngIf</h1>
+<input type="text" [(ngModel)]="person.name" />
+<p *ngIf="person.name === 'lucasedfc'">lucasedfc</p>
+<p *ngIf="person.name === 'homeronne' && person.age === 18; else elseBlock">
+  Do Homeronne
+</p>
+
+<ng-template #elseBlock>
+  <p>Else Block</p>
+</ng-template>
+
 <h1>NgModel</h1>
 
-<p>Name: {{person.name}}</p>
+<p>Name: {{ person.name }}</p>
 <input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
 <p>Valid: {{ nameInput.valid }}</p>
 
-<p>Age: {{person.age}}</p>
-<input type="number" required min="18" max="200" #ageInput="ngModel" [(ngModel)]="person.age" />
+<p>Age: {{ person.age }}</p>
+<input
+  type="number"
+  required
+  min="18"
+  max="200"
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+/>
 <p>Valid: {{ ageInput.valid }}</p>
-<hr>
-
+<hr />
 
 <h1>Events</h1>
 
 <button [disabled]="btnDisabled">Send</button>
 <button (click)="toggleButton()">Toggle Button</button>
 
-<p>Age: {{person.age}}</p>
+<p>Age: {{ person.age }}</p>
 <button (click)="addAge()">Age++</button>
 
 <div class="box" (scroll)="onScroll($event)">
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus velit laboriosam maiores veritatis. At doloremque molestiae eos, libero sequi alias earum id modi inventore blanditiis dolores eius totam officiis obcaecati atque itaque deserunt possimus voluptates maxime dolorum odio tempore magni?</p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus
+    velit laboriosam maiores veritatis. At doloremque molestiae eos, libero
+    sequi alias earum id modi inventore blanditiis dolores eius totam officiis
+    obcaecati atque itaque deserunt possimus voluptates maxime dolorum odio
+    tempore magni?
+  </p>
 </div>
 
-<p>Name: {{person.name}}</p>
-<input type="text" [value]="person.name" (keyup)="changeName($event)">
+<p>Name: {{ person.name }}</p>
+<input type="text" [value]="person.name" (keyup)="changeName($event)" />
 
-
-<hr>
+<hr />
 
 <h1>Property Binding</h1>
 
 <button [disabled]="btnDisabled">Send</button>
 
-<input type="text" [value]="person.name">
+<input type="text" [value]="person.name" />
 
-<progress max="100" value={{person.age}}></progress>
+<progress max="100" value="{{ person.age }}"></progress>
 
-<img [src]="person.avatar" alt="Random Image" width="100">
+<img [src]="person.avatar" alt="Random Image" width="100" />
 
-<hr>
+<hr />
 
 <h1>Hello World</h1>
 
-<h2>{{'Hello World '.repeat(3)}}</h2>
+<h2>{{ "Hello World ".repeat(3) }}</h2>
 
-<p> 3 + 3 = {{ 3 + 3 }}</p>
+<p>3 + 3 = {{ 3 + 3 }}</p>
 
-<h3>Hi, my name is {{name}} and my age is {{age}} years old</h3>
+<h3>Hi, my name is {{ name }} and my age is {{ age }} years old</h3>
 
-<img src={{img}} alt="Random Image" width="400">
+<img src="{{ img }}" alt="Random Image" width="200" />
