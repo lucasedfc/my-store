@@ -15,6 +15,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { SwiperModule } from 'swiper/angular';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HttpClientModule,
     FormsModule,
     SwiperModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },
