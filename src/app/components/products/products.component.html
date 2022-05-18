@@ -1,5 +1,15 @@
-<button (click)="createNewProduct()">Create</button>
-<button (click)="onShowDetail('4324324343232')">Detail Not Found</button>
+<!-- <button (click)="createNewProduct()">Create</button>
+<button (click)="onShowDetail('4324324343232')">Detail Not Found</button> -->
+
+<div class="loading-indicator">
+  <mat-progress-spinner  *ngIf="loading"
+          class="loading"
+          [mode]="'indeterminate'"
+          [value]="'Loading'">
+      </mat-progress-spinner>
+
+</div>
+
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -7,7 +17,12 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
-  <button (click)="loadMore()"> Load More</button>
+</div>
+
+<div class="load-more">
+  <button mat-icon-button (click)="loadMore()">
+    <mat-icon>expand_more</mat-icon>
+  </button>
 </div>
 
 <div
@@ -15,9 +30,10 @@
   class="product-detail"
   [class.active]="showProductDetail"
 >
-{{statusDetail}}
   <div>
-    <button>Close</button>
+    <button mat-icon-button (click)="toggleProductDetail()">
+      <mat-icon>close</mat-icon>
+    </button>
     <h1>{{ productChosen.title }}</h1>
 
     <swiper [slidesPerView]="1">
@@ -27,7 +43,9 @@
     </swiper>
 
     <p>{{ productChosen.description }}</p>
-    <button (click)="updateProduct()">Edit</button>
-    <button (click)="deleteProduct()">Remove</button>
+
+      <button class="margin8px" mat-raised-button color="accent" (click)="updateProduct()">Edit</button>
+      <button class="margin8px" mat-raised-button color="warn" (click)="deleteProduct()">Remove</button>
+
   </div>
 </div>

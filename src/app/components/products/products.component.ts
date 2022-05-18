@@ -17,6 +17,7 @@ import { zip } from 'rxjs';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  loading = true;
   myShoppingCart: Product[] = [];
   total = 0;
   products: Product[] = [];
@@ -47,6 +48,7 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAllProducts(10, 1).subscribe((data) => {
       this.products = data;
       this.offset += this.limit;
+      this.loading = false;
     });
   }
 
@@ -157,11 +159,13 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMore() {
+    this.loading = true;
     this.productsService
       .getProductByPage(this.limit, this.offset)
       .subscribe((data) => {
         this.products = this.products.concat(data);
         this.offset += this.limit;
+        this.loading = false;
       });
   }
 }
