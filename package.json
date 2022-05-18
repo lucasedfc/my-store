@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:proxy": "ng serve --proxy-config ./proxy.config.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -20,7 +21,11 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "date-fns": "^2.23.0",
+    "file-saver": "^2.0.5",
+    "remove": "^0.1.5",
     "rxjs": "~6.6.0",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.14",
     "swiper": "^8.1.4",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -34,6 +39,7 @@
     "@angular-eslint/template-parser": "12.3.1",
     "@angular/cli": "~12.1.2",
     "@angular/compiler-cli": "~12.1.2",
+    "@types/file-saver": "^2.0.5",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.28.2",

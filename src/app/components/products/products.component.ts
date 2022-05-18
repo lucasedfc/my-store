@@ -5,10 +5,12 @@ import {
   Product,
   UpdateProductDto,
 } from '../../models/product.model';
+import { switchMap } from 'rxjs/operators';
 
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
-
+import Swal from 'sweetalert2';
+import { zip } from 'rxjs';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -30,6 +32,9 @@ export class ProductsComponent implements OnInit {
     },
     description: '',
   };
+  limit = 10;
+  offset = 0;
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private storeService: StoreService,
@@ -39,8 +44,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts().subscribe((data) => {
+    this.productsService.getAllProducts(10, 1).subscribe((data) => {
       this.products = data;
+      this.offset += this.limit;
     });
   }
 
@@ -54,10 +60,20 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
+    this.statusDetail = 'loading';
     this.productsService.getProductById(id).subscribe({
       next: (product: Product) => {
         this.toggleProductDetail();
+        this.statusDetail = 'success';
         this.productChosen = product;
+      },
+      error: (err) => {
+        Swal.fire({
+          title: 'Error!',
+          text: err,
+          icon: 'error',
+        });
+        this.statusDetail = 'error';
       },
     });
   }
@@ -97,6 +113,36 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  readAndUpdate(id: string) {
+    this.productsService
+      .getProductById(id)
+      .pipe(
+        switchMap((product) =>
+          this.productsService.update(product.id, { title: 'change' })
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+      });
+    this.productsService
+      .fetchReadAndUpdate(id, { title: 'change' })
+      .subscribe((response) => {
+        const read = response[0];
+        const update = response[1];
+      });
+  }
+
+  fetchReadAndUpdate(id: string) {
+    return zip(
+      // run on parallel, recomended in service not in component.
+      this.productsService.getProductById(id),
+      this.productsService.update(id, { title: 'new' })
+    ).subscribe((response) => {
+      const product = response[0];
+      const update = response[1];
+    });
+  }
+
   deleteProduct() {
     const { id } = this.productChosen;
     this.productsService.delete(id).subscribe({
@@ -108,5 +154,14 @@ export class ProductsComponent implements OnInit {
         this.showProductDetail = false;
       },
     });
+  }
+
+  loadMore() {
+    this.productsService
+      .getProductByPage(this.limit, this.offset)
+      .subscribe((data) => {
+        this.products = this.products.concat(data);
+        this.offset += this.limit;
+      });
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewInit, OnDestroy, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -13,7 +14,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   @Input('img')
   set changeImg(newImg: string) {
     this.img = newImg;
-    console.log('change just img  =>' ,this.img);
+   // console.log('change just img  =>' ,this.img);
     // code
   }
   @Input() alt: string = '';
@@ -25,14 +26,14 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   constructor() {
     // before render
     // NO async -- once time
-    console.log('constructor', 'imgValue =>', this.img);
+   // console.log('constructor', 'imgValue =>', this.img);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // before - during render
     // changes inputs -- multiples times
-    console.log('ngOnChanges', 'imgValue =>', this.img);
-    console.log('changes', changes);
+    //console.log('ngOnChanges', 'imgValue =>', this.img);
+    //console.log('changes', changes);
     // if (changes.) {
     //   // code
     // }
@@ -41,22 +42,21 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   ngOnInit(): void {
     // before render
     // async - fetch -- once time
-    console.log('ngOnInit', 'imgValue =>', this.img);
+    //console.log('ngOnInit', 'imgValue =>', this.img);
     // this.counterFn = window.setInterval(() => {
     //   this.counter += 1;
     //   console.log('run counter');
     // }, 1000);
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngAfterViewInit() {
     // after render
     // handler children -- once time
-    console.log('ngAfterViewInit');
   }
 
   ngOnDestroy() {
     // delete -- once time
-    console.log('ngOnDestroy');
     // window.clearInterval(this.counterFn);
   }
 
