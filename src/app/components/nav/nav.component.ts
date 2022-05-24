@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/models/category.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 import { StoreService } from '../../services/store.service';
 
@@ -13,15 +15,18 @@ export class NavComponent implements OnInit {
   activeMenu = false;
   counter = 0;
   profile: User | null = null;
+  categories: Category[] = [];
 
   constructor(
     private storeService: StoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private categoryService: CategoriesService
   ) {}
 
   ngOnInit(): void {
     this.storeService.myCart$.subscribe((products) => {
       this.counter = products.length;
+      this.getAllCategories();
     });
   }
 
@@ -35,5 +40,13 @@ export class NavComponent implements OnInit {
       .subscribe((user) => {
         this.profile = user;
       });
+  }
+
+  getAllCategories() {
+    this.categoryService.getAll().subscribe({
+      next: (data => {
+        this.categories = data;
+      })
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import {
   CreateProductDto,
@@ -16,11 +16,14 @@ import { zip } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
-  loading = true;
+export class ProductsComponent {
+
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() onLoadMore = new EventEmitter<string>();
+  @Input() loading = false;
+  @Input() products: Product[] = [];
   myShoppingCart: Product[] = [];
   total = 0;
-  products: Product[] = [];
   showProductDetail: boolean = false;
   productChosen: Product = {
     id: '',
@@ -42,14 +45,6 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
-  }
-
-  ngOnInit(): void {
-    this.productsService.getAllProducts(10, 1).subscribe((data) => {
-      this.products = data;
-      this.offset += this.limit;
-      this.loading = false;
-    });
   }
 
   onAddToShoppingCart(product: Product) {
@@ -159,13 +154,6 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMore() {
-    this.loading = true;
-    this.productsService
-      .getProductByPage(this.limit, this.offset)
-      .subscribe((data) => {
-        this.products = this.products.concat(data);
-        this.offset += this.limit;
-        this.loading = false;
-      });
+    this.onLoadMore.emit();
   }
 }

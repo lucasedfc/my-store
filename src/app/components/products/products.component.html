@@ -1,13 +1,11 @@
-<!-- <button (click)="createNewProduct()">Create</button>
-<button (click)="onShowDetail('4324324343232')">Detail Not Found</button> -->
-
 <div class="loading-indicator">
-  <mat-progress-spinner  *ngIf="loading"
-          class="loading"
-          [mode]="'indeterminate'"
-          [value]="'Loading'">
-      </mat-progress-spinner>
-
+  <mat-progress-spinner
+    *ngIf="loading"
+    class="loading"
+    [mode]="'indeterminate'"
+    [value]="'Loading'"
+  >
+  </mat-progress-spinner>
 </div>
 
 <div class="products--grid">
@@ -44,8 +42,21 @@
 
     <p>{{ productChosen.description }}</p>
 
-      <button class="margin8px" mat-raised-button color="accent" (click)="updateProduct()">Edit</button>
-      <button class="margin8px" mat-raised-button color="warn" (click)="deleteProduct()">Remove</button>
-
+    <button
+      class="margin8px"
+      mat-raised-button
+      color="accent"
+      (click)="updateProduct()"
+    >
+      Edit
+    </button>
+    <button
+      class="margin8px"
+      mat-raised-button
+      color="warn"
+      (click)="deleteProduct()"
+    >
+      Remove
+    </button>
   </div>
 </div>
