@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import {
   CreateProductDto,
   Product,
   UpdateProductDto,
-} from '../../models/product.model';
+} from '../../../models/product.model';
 import { switchMap } from 'rxjs/operators';
 
-import { StoreService } from '../../services/store.service';
-import { ProductsService } from '../../services/products.service';
+import { StoreService } from '../../../services/store.service';
+import { ProductsService } from '../../../services/products.service';
 import Swal from 'sweetalert2';
 import { zip } from 'rxjs';
 @Component({

@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 
-import { StoreService } from '../../services/store.service';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-nav',
