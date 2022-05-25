@@ -12,10 +12,10 @@ import { ProductsService } from 'src/app/services/products.service';
 export class CategoryComponent implements OnInit {
 
   categoryId: string | null = null;
+  loading = true;
   limit = 10;
   offset = 0;
   products: Product[] = [];
-  loading = true;
 
   constructor(
     private route: ActivatedRoute,
