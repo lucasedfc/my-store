@@ -1,13 +1,16 @@
 <a href="" [routerLink]="['/product', product.id]">
-  <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img>
+  <app-img
+    *ngIf="product.images.length > 0"
+    [img]="product.images[0]"
+  ></app-img>
 </a>
-<h2>{{ product.price | currency:'COP' }}</h2>
+<h2>{{ product.price | currency: "COP" }}</h2>
 <p>{{ product.title }}</p>
-<p>{{ product?.taxes | currency: 'COP' }}</p>
-<button mat-icon-button color="primary" (click)="onShowDetail()">
+<p>{{ product?.taxes | currency: "COP" }}</p>
+<!-- <button mat-icon-button color="primary" (click)="onShowDetail()">
   <mat-icon>preview</mat-icon>
-</button>
-
+</button> -->
+<a href="" routerLink="." [queryParams]="{ product: product.id }">View Detail</a>
 <button mat-icon-button color="primary" (click)="onAddToCart()">
   <mat-icon>add_shopping_cart</mat-icon>
 </button>

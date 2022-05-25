@@ -14,7 +14,6 @@ export class ProductDetailComponent implements OnInit {
 
   productId: string | null = null;
   product: Product | null = null;
-  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,11 +35,7 @@ export class ProductDetailComponent implements OnInit {
       .subscribe({
         next: (data => {
           this.product = data;
-          this.loading = false;
-        }),
-        error: () => {
-          this.loading = false;
-        }
+        })
       })
   }
 
