@@ -39,7 +39,12 @@
     </nav>
     <div class="info">
       <button style="margin-right:10px" *ngIf="!profile; else elseBlock" mat-raised-button color="accent" (click)="login()">Login</button>
-      <ng-template #elseBlock>{{ profile?.email }}</ng-template>
+      <ng-template #elseBlock>
+        <a href="" routerLink="/profile">{{profile?.email}}</a>
+        <button mat-icon-button color="primary" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </ng-template>
       <div class="cart">
         <a href="">
           <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">

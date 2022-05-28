@@ -33,6 +33,7 @@ export class AppComponent {
         name: 'Luke',
         email: 'luke@luke.com',
         password: '123456',
+        role: 'admin'
       })
       .subscribe((res) => {
         console.log(res);
