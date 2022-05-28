@@ -5,7 +5,6 @@ import { WebsiteRoutingModule } from './website-routing.module';
 
 import { NavComponent } from '.././website/components/nav/nav.component';
 import { HomeComponent } from '.././website/pages/home/home.component';
-import { CategoryComponent } from '.././website/pages/category/category.component';
 import { MycartComponent } from '.././website/pages/mycart/mycart.component';
 import { LoginComponent } from '.././website/pages/login/login.component';
 import { RegisterComponent } from '.././website/pages/register/register.component';
@@ -22,7 +21,6 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     NavComponent,
     HomeComponent,
-    CategoryComponent,
     MycartComponent,
     LoginComponent,
     RegisterComponent,
