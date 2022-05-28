@@ -29,6 +29,10 @@ export class NavComponent implements OnInit {
     this.storeService.myCart$.subscribe((products) => {
       this.counter = products.length;
       this.getAllCategories();
+      this.authService.user$
+      .subscribe(data => {
+        this.profile = data;
+      })
     });
   }
 
@@ -40,7 +44,7 @@ export class NavComponent implements OnInit {
     this.authService
       .loginAndGetprofile('john@mail.com', 'changeme')
       .subscribe((user) => {
-        this.profile = user;
+        this.router.navigate(['/profile']);
       });
   }
 
