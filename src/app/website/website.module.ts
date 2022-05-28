@@ -16,6 +16,7 @@ import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatButtonModule } from '@angular/material/button';
     SwiperModule,
     MatButtonModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    QuicklinkModule
   ],
 })
 export class WebsiteModule {}
